@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DopamineMeter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int dopamine = 100; // Maximum dopamine level
+    public Slider slider;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateDopamine()
     {
-        
+        dopamine--;
+        slider.value = dopamine;
     }
 }
