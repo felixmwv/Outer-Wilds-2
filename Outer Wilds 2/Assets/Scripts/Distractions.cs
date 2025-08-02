@@ -3,23 +3,52 @@ using UnityEngine;
 public class Distractions : MonoBehaviour
 {
     public DopamineMeter dopamineMeter;
-    public static bool isDistracted = false;
+    [SerializeField] KeyCode cancelKey = KeyCode.C;
+
+    private Coroutine distractionCoroutine;
+    private Coroutine dopamineIncreaseCoroutine;
+    [SerializeField] private int distractionDuration = 5; // Duration of the distraction in seconds
 
     public void DistractionStarter()
     {
-        if (!isDistracted)
+        if (!dopamineMeter.isDistracted)
         {
-            StartCoroutine(DistractionCoroutine());
+            distractionCoroutine = StartCoroutine(DistractionCoroutine());
         }
     }
 
     private System.Collections.IEnumerator DistractionCoroutine()
     {
-        isDistracted = true;
+        dopamineMeter.isDistracted = true;
         Debug.Log("afleiding bezig");
-        dopamineMeter.AddDopamine(25, 5f); // Add dopamine for 5 seconds
-        yield return new WaitForSeconds(5f); // Wait for the distraction duration
+
+        dopamineIncreaseCoroutine = dopamineMeter.AddDopamine(25, distractionDuration); // Add dopamine for 5 seconds
+        yield return new WaitForSeconds(distractionDuration); // Wait for the distraction duration
+
         Debug.Log("afleiding afgelopen");
-        isDistracted = false; // Reset distraction state
+        dopamineMeter.isDistracted = false; // Reset distraction state
+
+        dopamineIncreaseCoroutine = null;
+        distractionCoroutine = null;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(cancelKey))
+        {
+            if (distractionCoroutine != null)
+            {
+                StopCoroutine(distractionCoroutine);
+                distractionCoroutine = null;
+            }
+
+            if (dopamineIncreaseCoroutine != null)
+            {
+                dopamineMeter.CancelCurrentIncrease();
+                dopamineIncreaseCoroutine = null;
+            }
+            dopamineMeter.isDistracted = false;
+            Debug.Log("Distraction cancelled by player.");
+        }
     }
 }
