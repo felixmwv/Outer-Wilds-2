@@ -1483,7 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dopamineMeter: {fileID: 1086210344}
   cancelKey: 103
-  distractionDuration: 5
+  distractionDuration: 20
 --- !u!4 &656807322
 Transform:
   m_ObjectHideFlags: 0
@@ -2430,7 +2430,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 50
+  m_Value: 60
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2446,10 +2446,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7486fad51a588f340bb42d0c27f073a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dopamine: 50
+  dopamine: 60
   dopamineDecreaseAmount: 1
   Slider: {fileID: 1086210343}
   isDistracted: 0
+  volume: {fileID: 832575518}
+  targetFocalLength: 150
+  targetVignette: 0.4
+  targetLensDistortion: -0.3
+  targetChromaticAberration: 0.5
 --- !u!1 &1092563060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,7 +2680,7 @@ MonoBehaviour:
   distractions:
   - {fileID: 656807321}
   dopamineMeter: {fileID: 1086210344}
-  delayBetweenDistractions: 10
+  delayBetweenDistractions: 100
 --- !u!4 &1376653286
 Transform:
   m_ObjectHideFlags: 0

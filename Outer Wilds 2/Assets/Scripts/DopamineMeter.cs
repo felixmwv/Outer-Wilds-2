@@ -1,19 +1,69 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal; // Or .HighDefinition if using HDRP
 
 public class DopamineMeter : MonoBehaviour
 {
-    public int dopamine = 100; // Maximum dopamine level
+    public int dopamine = 100;
     public int dopamineDecreaseAmount = 1;
     public Slider Slider;
     public bool isDistracted = false;
 
+    // Add reference to your Volume
+    public Volume volume;
+
+    // Store original values
+    private float originalFocalLength = 50f;
+    private float originalVignette = 0.2f;
+    private float originalLensDistortion = 0f;
+    private float originalChromaticAberration = 0f;
+
+    // Target values when dopamine is 0
+    [SerializeField] private float targetFocalLength = 150f;
+    [SerializeField] private float targetVignette = 0.4f;
+    [SerializeField] private float targetLensDistortion = -0.3f;
+    [SerializeField] private float targetChromaticAberration = 0.5f;
+
+    // Cached effect components
+    private DepthOfField dof;
+    private Vignette vignette;
+    private LensDistortion lensDistortion;
+    private ChromaticAberration chromaticAberration;
+
     private Coroutine addCoroutine;
+
     private void Start()
     {
-        // Start the coroutine to decrease dopamine over time
+        // Get effect components from the VolumeProfile
+        if (volume != null && volume.profile != null)
+        {
+            volume.profile.TryGet(out dof);
+            volume.profile.TryGet(out vignette);
+            volume.profile.TryGet(out lensDistortion);
+            volume.profile.TryGet(out chromaticAberration);
+        }
         StartCoroutine(DecreaseDopamineCoroutine());
     }
+
+    private void Update()
+    {
+        UpdateVolumeEffects();
+    }
+
+    private void UpdateVolumeEffects()
+    {
+        if (dof != null && vignette != null && lensDistortion != null && chromaticAberration != null)
+        {
+            float t = Mathf.InverseLerp(50, 0, Mathf.Clamp(dopamine, 0, 50));
+            // Lerp from original to target as dopamine drops from 50 to 0
+            dof.focalLength.value = Mathf.Lerp(originalFocalLength, targetFocalLength, t);
+            vignette.intensity.value = Mathf.Lerp(originalVignette, targetVignette, t);
+            lensDistortion.intensity.value = Mathf.Lerp(originalLensDistortion, targetLensDistortion, t);
+            chromaticAberration.intensity.value = Mathf.Lerp(originalChromaticAberration, targetChromaticAberration, t);
+        }
+    }
+
     public void TestDopamine()
     {
         dopamine = Mathf.Min(100, dopamine + 25);
