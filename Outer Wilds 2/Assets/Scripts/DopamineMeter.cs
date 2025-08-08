@@ -12,6 +12,7 @@ public class DopamineMeter : MonoBehaviour
 
     // Add reference to your Volume
     public Volume volume;
+    public int dopamineThreshold = 50; // Threshold for dopamine effects
 
     // Store original values
     private float originalFocalLength = 50f;
@@ -55,7 +56,7 @@ public class DopamineMeter : MonoBehaviour
     {
         if (dof != null && vignette != null && lensDistortion != null && chromaticAberration != null)
         {
-            float t = Mathf.InverseLerp(50, 0, Mathf.Clamp(dopamine, 0, 50));
+            float t = Mathf.InverseLerp(dopamineThreshold, 0, Mathf.Clamp(dopamine, 0, dopamineThreshold));
             // Lerp from original to target as dopamine drops from 50 to 0
             dof.focalLength.value = Mathf.Lerp(originalFocalLength, targetFocalLength, t);
             vignette.intensity.value = Mathf.Lerp(originalVignette, targetVignette, t);
