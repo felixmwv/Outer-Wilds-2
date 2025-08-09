@@ -3256,11 +3256,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dopamine: 100
   dopamineDecreaseAmount: 1
-  dopamineIncreaseAmount: 80
-  Slider: {fileID: 1086210343}
-  isDistracted: 0
-  volume: {fileID: 832575518}
+  dopamineIncreaseAmount: 75
   dopamineThreshold: 60
+  addingSteps: 40
+  isDistracted: 0
+  Slider: {fileID: 1086210343}
+  volume: {fileID: 832575518}
   targetFocalLength: 150
   targetVignette: 0.4
   targetLensDistortion: -0.3
@@ -3493,7 +3494,7 @@ MonoBehaviour:
   distractions:
   - {fileID: 656807321}
   dopamineMeter: {fileID: 1086210344}
-  delayBetweenDistractions: 80
+  delayBetweenDistractions: 75
 --- !u!4 &1376653286
 Transform:
   m_ObjectHideFlags: 0

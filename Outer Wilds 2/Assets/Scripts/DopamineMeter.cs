@@ -1,27 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal; // Or .HighDefinition if using HDRP
+using UnityEngine.Rendering.Universal;
 
 public class DopamineMeter : MonoBehaviour
 {
     public int dopamine = 100;
     public int dopamineDecreaseAmount = 1;
-    public int dopamineIncreaseAmount = 25; // Amount to increase dopamine when testing
-    public Slider Slider;
+    public int dopamineIncreaseAmount = 25;
+    public int dopamineThreshold = 50;
+    public int addingSteps = 10;
     public bool isDistracted = false;
-
-    // Add reference to your Volume
+    public Slider Slider;
     public Volume volume;
-    public int dopamineThreshold = 50; // Threshold for dopamine effects
 
-    // Store original values
+    //Original values for visual effects
     private float originalFocalLength = 50f;
     private float originalVignette = 0.2f;
     private float originalLensDistortion = 0f;
     private float originalChromaticAberration = 0f;
 
-    // Target values when dopamine is 0
+    //Target values for visual effects
     [SerializeField] private float targetFocalLength = 150f;
     [SerializeField] private float targetVignette = 0.4f;
     [SerializeField] private float targetLensDistortion = -0.3f;
@@ -93,7 +92,7 @@ public class DopamineMeter : MonoBehaviour
     //dopamine increase coroutine which will increase the dopamine level over a specified duration
     private System.Collections.IEnumerator AddDopamineCoroutine(int totalAmount, float duration)
     {
-        int steps = 10; // Number of steps to increase dopamine
+        int steps = addingSteps; // Number of steps to increase dopamine
         float stepDuration = duration / steps; // Duration for each step
         int amountPerStep = totalAmount / steps; // Amount to increase in each step
 
