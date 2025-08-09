@@ -3,11 +3,10 @@ using UnityEngine;
 public class Distractions : MonoBehaviour
 {
     public DopamineMeter dopamineMeter;
-    [SerializeField] KeyCode cancelKey = KeyCode.C;
+    [SerializeField] private int distractionDuration = 5; // Duration of the distraction in seconds
 
     private Coroutine distractionCoroutine;
     private Coroutine dopamineIncreaseCoroutine;
-    [SerializeField] private int distractionDuration = 5; // Duration of the distraction in seconds
 
     public void DistractionStarter()
     {
@@ -22,7 +21,7 @@ public class Distractions : MonoBehaviour
         dopamineMeter.isDistracted = true;
         Debug.Log("afleiding bezig");
 
-        dopamineIncreaseCoroutine = dopamineMeter.AddDopamine(25, distractionDuration); // Add dopamine for 5 seconds
+        dopamineIncreaseCoroutine = dopamineMeter.AddDopamine(dopamineMeter.dopamineIncreaseAmount, distractionDuration); // Add dopamine for 5 seconds
         yield return new WaitForSeconds(distractionDuration); // Wait for the distraction duration
 
         Debug.Log("afleiding afgelopen");
@@ -31,24 +30,19 @@ public class Distractions : MonoBehaviour
         dopamineIncreaseCoroutine = null;
         distractionCoroutine = null;
     }
-
-    void Update()
+    public void ForceStopDistraction()
     {
-        if (Input.GetKeyDown(cancelKey))
+        if (distractionCoroutine != null)
         {
-            if (distractionCoroutine != null)
-            {
-                StopCoroutine(distractionCoroutine);
-                distractionCoroutine = null;
-            }
-
-            if (dopamineIncreaseCoroutine != null)
-            {
-                dopamineMeter.CancelCurrentIncrease();
-                dopamineIncreaseCoroutine = null;
-            }
-            dopamineMeter.isDistracted = false;
-            Debug.Log("Distraction cancelled by player.");
+            StopCoroutine(distractionCoroutine);
+            distractionCoroutine = null;
         }
+        if (dopamineIncreaseCoroutine != null)
+        {
+            dopamineMeter.CancelCurrentIncrease();
+            dopamineIncreaseCoroutine = null;
+        }
+        dopamineMeter.isDistracted = false;
+        Debug.Log("Distraction forcefully stopped.");
     }
 }

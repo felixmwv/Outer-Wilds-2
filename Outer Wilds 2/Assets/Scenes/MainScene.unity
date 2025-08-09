@@ -1167,8 +1167,8 @@ MonoBehaviour:
   PanAxis:
     Value: 0
     Center: 0
-    Range: {x: -180, y: 180}
-    Wrap: 1
+    Range: {x: -90, y: 90}
+    Wrap: 0
     Recentering:
       Enabled: 0
       Wait: 1
@@ -2183,7 +2183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dopamineMeter: {fileID: 1086210344}
-  cancelKey: 103
   distractionDuration: 20
 --- !u!4 &656807322
 Transform:
@@ -3257,6 +3256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dopamine: 100
   dopamineDecreaseAmount: 1
+  dopamineIncreaseAmount: 80
   Slider: {fileID: 1086210343}
   isDistracted: 0
   volume: {fileID: 832575518}
@@ -3493,7 +3493,7 @@ MonoBehaviour:
   distractions:
   - {fileID: 656807321}
   dopamineMeter: {fileID: 1086210344}
-  delayBetweenDistractions: 30
+  delayBetweenDistractions: 80
 --- !u!4 &1376653286
 Transform:
   m_ObjectHideFlags: 0
@@ -5260,7 +5260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 867a5d92210ac03468a702476bfb1cfa, type: 2}
+  - {fileID: 2100000, guid: f91de24c133a8604a955d55596de1b13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5303,6 +5303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials:
+  - {fileID: 2100000, guid: f91de24c133a8604a955d55596de1b13, type: 2}
   - {fileID: 2100000, guid: 867a5d92210ac03468a702476bfb1cfa, type: 2}
   - {fileID: 2100000, guid: 4d935300ef35e6948a8c6e887211b292, type: 2}
   - {fileID: 2100000, guid: 81590610f270a524c87d253b4b3f6196, type: 2}
@@ -5386,6 +5387,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   distractedGain: 0.1
   zoomedFOV: 20
+  currentDistraction: {fileID: 656807321}
 --- !u!1 &2087519775
 GameObject:
   m_ObjectHideFlags: 0
@@ -5716,9 +5718,9 @@ SceneRoots:
   - {fileID: 1539230534}
   - {fileID: 1817299424}
   - {fileID: 1879005593}
-  - {fileID: 24835094}
-  - {fileID: 1376653286}
-  - {fileID: 656807322}
   - {fileID: 1971382028}
-  - {fileID: 1941358976}
   - {fileID: 536824149}
+  - {fileID: 24835094}
+  - {fileID: 656807322}
+  - {fileID: 1376653286}
+  - {fileID: 1941358976}

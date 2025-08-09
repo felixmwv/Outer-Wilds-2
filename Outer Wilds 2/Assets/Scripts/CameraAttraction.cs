@@ -26,6 +26,8 @@ public class CameraAttraction : MonoBehaviour
     public float zoomedFOV = 20f;
     private Coroutine fovCoroutine;
 
+    public Distractions currentDistraction; // Assign this when a distraction starts
+
     void Start()
     {
         panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
@@ -79,7 +81,8 @@ public class CameraAttraction : MonoBehaviour
 
             if (distractionActive && angle > releaseAngle && angle > initialAngle + 1f)
             {
-                dopamineMeter.isDistracted = false;
+                if (currentDistraction != null)
+                    currentDistraction.ForceStopDistraction();
                 distractionActive = false;
             }
         }

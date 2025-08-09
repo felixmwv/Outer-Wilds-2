@@ -7,6 +7,7 @@ public class DopamineMeter : MonoBehaviour
 {
     public int dopamine = 100;
     public int dopamineDecreaseAmount = 1;
+    public int dopamineIncreaseAmount = 25; // Amount to increase dopamine when testing
     public Slider Slider;
     public bool isDistracted = false;
 
@@ -65,11 +66,6 @@ public class DopamineMeter : MonoBehaviour
         }
     }
 
-    public void TestDopamine()
-    {
-        dopamine = Mathf.Min(100, dopamine + 25);
-        UpdateSlider();
-    }
     //dopamine decrease coroutine which will decrease the dopamine level over time
     private System.Collections.IEnumerator DecreaseDopamineCoroutine()
     {
