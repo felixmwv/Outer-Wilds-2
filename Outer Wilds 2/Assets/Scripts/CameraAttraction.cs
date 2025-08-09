@@ -5,7 +5,7 @@ public class CameraAttraction : MonoBehaviour
 {
     public CinemachineCamera virtualCamera;
     public DopamineMeter dopamineMeter;
-    public Transform distractionTarget;
+    public Transform distractionTarget => currentDistraction != null ? currentDistraction.distractionTarget : null;
     public float attractionStrength = 5f;
     public float releaseAngle = 45f;
     public AnimationCurve attractionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -17,16 +17,16 @@ public class CameraAttraction : MonoBehaviour
     private CinemachineInputAxisController inputAxisController;
     private float? originalGain0 = null;
     private float? originalGain1 = null;
-    public float distractedGain = 0.1f; // Lager getal voor tijdens afleiding
+    public float distractedGain = 0.1f;
 
-    private bool wasDistracted = false; // Nieuw: onthoud vorige status
+    private bool wasDistracted = false;
 
-    // FOV zoom
+    //FOV zoom
     private float originalFOV = 50f;
     public float zoomedFOV = 20f;
     private Coroutine fovCoroutine;
 
-    public Distractions currentDistraction; // Assign this when a distraction starts
+    public Distractions currentDistraction;
 
     void Start()
     {
@@ -39,18 +39,17 @@ public class CameraAttraction : MonoBehaviour
     {
         if (dopamineMeter.isDistracted && distractionTarget != null && panTilt != null)
         {
-            // Sla originele gain-waarden op bij eerste afleiding
+            //Save original gain values when distraction starts
             if (!distractionActive && inputAxisController != null && inputAxisController.Controllers.Count >= 2)
             {
                 if (originalGain0 == null) originalGain0 = inputAxisController.Controllers[0].Input.Gain;
                 if (originalGain1 == null) originalGain1 = inputAxisController.Controllers[1].Input.Gain;
 
-                // Respecteer het teken van de originele gain
                 inputAxisController.Controllers[0].Input.Gain = Mathf.Sign(originalGain0.Value) * Mathf.Abs(distractedGain);
                 inputAxisController.Controllers[1].Input.Gain = Mathf.Sign(originalGain1.Value) * Mathf.Abs(distractedGain);
             }
 
-            // Start FOV zoom-in bij begin afleiding
+            //Start FOV zoom in 
             if (!distractionActive)
             {
                 if (fovCoroutine != null) StopCoroutine(fovCoroutine);
@@ -91,7 +90,7 @@ public class CameraAttraction : MonoBehaviour
             distractionActive = false;
         }
 
-        // Reset gain en FOV als de afleiding net is gestopt
+        //Reset gain and FOV when distraction ends
         if (wasDistracted && !dopamineMeter.isDistracted && inputAxisController != null && inputAxisController.Controllers.Count >= 2)
         {
             if (originalGain0.HasValue)
@@ -99,15 +98,12 @@ public class CameraAttraction : MonoBehaviour
             if (originalGain1.HasValue)
                 inputAxisController.Controllers[1].Input.Gain = originalGain1.Value;
 
-            // Start FOV zoom-out
+            //Start FOV zoom out
             if (fovCoroutine != null) StopCoroutine(fovCoroutine);
             fovCoroutine = StartCoroutine(AnimateFOV(virtualCamera.Lens.FieldOfView, originalFOV, 1f));
         }
-
-        // Update de status voor de volgende frame
         wasDistracted = dopamineMeter.isDistracted;
     }
-
     private System.Collections.IEnumerator AnimateFOV(float from, float to, float duration)
     {
         float elapsed = 0f;

@@ -3,6 +3,8 @@ using UnityEngine;
 public class Distractions : MonoBehaviour
 {
     public DopamineMeter dopamineMeter;
+    public Transform distractionTarget;
+
     [SerializeField] private int distractionDuration = 5; // Duration of the distraction in seconds
 
     private Coroutine distractionCoroutine;

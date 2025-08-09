@@ -1254,7 +1254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ac717293bfd034f87d1a36c7cffbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraManager: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dopamineMeter: {fileID: 1086210344}
+  distractionTarget: {fileID: 1971382028}
   distractionDuration: 20
 --- !u!4 &656807322
 Transform:
@@ -3076,6 +3076,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866503908}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &909896642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 909896644}
+  - component: {fileID: 909896643}
+  m_Layer: 0
+  m_Name: Distraction 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &909896643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909896642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1141746a178054a9bb944652ac3370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dopamineMeter: {fileID: 1086210344}
+  distractionTarget: {fileID: 536824149}
+  distractionDuration: 20
+--- !u!4 &909896644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909896642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.98149395, y: 1.8784658, z: 1.5908493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1066164202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3256,9 +3303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dopamine: 100
   dopamineDecreaseAmount: 1
-  dopamineIncreaseAmount: 75
+  dopamineIncreaseAmount: 70
   dopamineThreshold: 60
-  addingSteps: 40
+  addingSteps: 20
   isDistracted: 0
   Slider: {fileID: 1086210343}
   volume: {fileID: 832575518}
@@ -3492,9 +3539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distractions:
+  - {fileID: 909896643}
   - {fileID: 656807321}
   dopamineMeter: {fileID: 1086210344}
-  delayBetweenDistractions: 75
+  cameraAttraction: {fileID: 2085241714}
+  delayBetweenDistractions: 70
 --- !u!4 &1376653286
 Transform:
   m_ObjectHideFlags: 0
@@ -5359,7 +5408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 393195956}
   dopamineMeter: {fileID: 1086210344}
-  distractionTarget: {fileID: 1971382028}
   attractionStrength: 5
   releaseAngle: 45
   attractionCurve:
@@ -5388,7 +5436,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   distractedGain: 0.1
   zoomedFOV: 20
-  currentDistraction: {fileID: 656807321}
+  currentDistraction: {fileID: 909896643}
 --- !u!1 &2087519775
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,5 +5771,6 @@ SceneRoots:
   - {fileID: 536824149}
   - {fileID: 24835094}
   - {fileID: 656807322}
+  - {fileID: 909896644}
   - {fileID: 1376653286}
   - {fileID: 1941358976}

@@ -28,6 +28,7 @@ public class ExamScript : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         ShowQuestion();
         nextButton.onClick.AddListener(OnNextClicked);
     }
@@ -37,6 +38,8 @@ public class ExamScript : MonoBehaviour
         // Clear old toggles
         foreach (Transform child in answersParent)
             Destroy(child.gameObject);
+
+        answersToggleGroup.allowSwitchOff = true;
 
         var q = questions[currentQuestion];
         questionText.text = q.questionText;
@@ -84,7 +87,10 @@ public class ExamScript : MonoBehaviour
     void ShowScore()
     {
         questionText.text = "Toets afgerond!";
-        scoreText.text = $"Score: {score} / {questions.Length}";
+        if (score < 3)
+            scoreText.text = $"Score: {score} / {questions.Length}\nGefaald";
+        else
+            scoreText.text = $"Score: {score} / {questions.Length}";
         answersParent.gameObject.SetActive(false);
         nextButton.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(true);

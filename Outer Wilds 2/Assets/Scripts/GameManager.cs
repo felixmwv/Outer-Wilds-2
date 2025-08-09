@@ -4,13 +4,15 @@ public class GameManager : MonoBehaviour
 {
     public Distractions[] distractions;
     public DopamineMeter dopamineMeter;
+    public CameraAttraction cameraAttraction;
     public float delayBetweenDistractions = 30f;
 
-   private void Start()
+    private int currentDistractionIndex = 0; // Houd de huidige index bij
+
+    private void Start()
     {
         StartCoroutine(ManageDistractions());
     }
-
     private System.Collections.IEnumerator ManageDistractions()
     {
         while (true)
@@ -19,10 +21,15 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(delayBetweenDistractions);
 
-            if(!dopamineMeter.isDistracted) // Check if no distraction is currently active
+            if (!dopamineMeter.isDistracted && distractions.Length > 0)
             {
-                int randomIndex = Random.Range(0, distractions.Length); // Select a random distraction
-                distractions[randomIndex].DistractionStarter(); // Start the distraction
+                var chosenDistraction = distractions[currentDistractionIndex];
+
+                if (cameraAttraction != null)
+                    cameraAttraction.currentDistraction = chosenDistraction;
+
+                chosenDistraction.DistractionStarter();
+                currentDistractionIndex = (currentDistractionIndex + 1) % distractions.Length;
             }
             else
             {
