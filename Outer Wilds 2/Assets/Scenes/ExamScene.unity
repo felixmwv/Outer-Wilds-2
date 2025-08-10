@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questions:
-  - questionText: Welk getal ontbrak er?
+  - questionText: 1. Welk getal ontbrak er?
     answers:
     - 5
     - 7
@@ -339,14 +339,14 @@ MonoBehaviour:
     - 6
     correctAnswerIndex: 2
     selectedAnswerIndex: -1
-  - questionText: Wat is de juiste vertaling van Omuringo?
+  - questionText: 2. Wat is de juiste vertaling van Omuringo?
     answers:
     - Proces
     - Versnelling
     - Grafisch
     correctAnswerIndex: 0
     selectedAnswerIndex: -1
-  - questionText: Welke foto had een banaan
+  - questionText: 3. Welke foto bevatte een banaan?
     answers:
     - Linksboven
     - Rechtsboven
@@ -355,7 +355,7 @@ MonoBehaviour:
     - Geen
     correctAnswerIndex: 1
     selectedAnswerIndex: -1
-  - questionText: Wat was het belangrijkste onderwerp in de foto's?
+  - questionText: 4. Wat was het belangrijkste onderwerp in de foto's?
     answers:
     - Raam
     - Fruit
@@ -363,7 +363,7 @@ MonoBehaviour:
     - Sport
     correctAnswerIndex: 2
     selectedAnswerIndex: -1
-  - questionText: Welk symbool was rechtsboven?
+  - questionText: 5. Welk symbool was rechtsboven?
     answers:
     - Cirkel
     - Ster
@@ -371,7 +371,7 @@ MonoBehaviour:
     - Zeshoek
     correctAnswerIndex: 1
     selectedAnswerIndex: -1
-  - questionText: Welke kleur was de kat?
+  - questionText: 6. Welke kleur was de kat?
     answers:
     - Wit
     - Zwart
