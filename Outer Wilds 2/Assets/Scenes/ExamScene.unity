@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questions:
-  - questionText: Welk getal ontbrak er?
+  - questionText: Which number was missing?
     answers:
     - 5
     - 7
@@ -339,44 +339,44 @@ MonoBehaviour:
     - 6
     correctAnswerIndex: 2
     selectedAnswerIndex: -1
-  - questionText: Wat is de juiste vertaling van Omuringo?
+  - questionText: What is the correct translation of Omuringo?
     answers:
-    - Proces
-    - Versnelling
-    - Grafisch
+    - Process
+    - Acceleration
+    - Graphic
     correctAnswerIndex: 0
     selectedAnswerIndex: -1
-  - questionText: Welke foto had een banaan
+  - questionText: Which picture contained a banana?
     answers:
-    - Linksboven
-    - Rechtsboven
-    - Linksonder
-    - Rechtsonder
-    - Geen
+    - Upper left
+    - Upper right
+    - Down left
+    - Down right
+    - None
     correctAnswerIndex: 1
     selectedAnswerIndex: -1
-  - questionText: Wat was het belangrijkste onderwerp in de foto's?
+  - questionText: What was the most important subject in the pictures?
     answers:
-    - Raam
+    - Window
     - Fruit
-    - Tafel
+    - Table
     - Sport
     correctAnswerIndex: 2
     selectedAnswerIndex: -1
-  - questionText: Welk symbool was rechtsboven?
+  - questionText: Which symbol was upper right
     answers:
     - Cirkel
-    - Ster
-    - Vierkant
-    - Zeshoek
+    - Star
+    - Square
+    - Hexagon
     correctAnswerIndex: 1
     selectedAnswerIndex: -1
-  - questionText: Welke kleur was de kat?
+  - questionText: Which color was the cat?
     answers:
-    - Wit
-    - Zwart
-    - Oranje
-    - Niet gezegd
+    - White
+    - Black
+    - Orange
+    - Not specified
     correctAnswerIndex: 3
     selectedAnswerIndex: -1
   questionText: {fileID: 2076286746}
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Volgende
+  m_text: 'Next Question
 
 '
   m_isRightToLeft: 0

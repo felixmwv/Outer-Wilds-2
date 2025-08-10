@@ -86,9 +86,9 @@ public class ExamScript : MonoBehaviour
 
     void ShowScore()
     {
-        questionText.text = "Toets afgerond!";
+        questionText.text = "Exam complete!";
         if (score < 3)
-            scoreText.text = $"Score: {score} / {questions.Length}\nGefaald";
+            scoreText.text = $"Score: {score} / {questions.Length}\nFailed";
         else
             scoreText.text = $"Score: {score} / {questions.Length}";
         answersParent.gameObject.SetActive(false);
